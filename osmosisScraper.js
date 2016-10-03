@@ -1,0 +1,38 @@
+const osmosis = require('osmosis');
+
+class OsmosisScraper {
+  constructor(searchString){
+    this.data = []
+    this.searchString = searchString;
+  }
+
+  scrape(callback){
+    let that = this;
+    osmosis
+      .get('https://www.nyaa.se/?page=search&cats=0_0&filter=0', {term: this.searchString})
+      .find('td.tlistname > a')
+      .follow('@href')
+      .find('.viewdownloadbutton > a')
+      .set('url', '@href')
+      .find('td.vtop')
+      .set('date', 'text()')
+      .find("td.viewtorrentname")
+      .set("filename", "text()")
+      .data(function(data) {
+        that.data.push(data);
+      }).done(() => callback({
+        title: that.searchString,
+        description: that.searchString,
+        items: that.data.map(x => {
+          return {
+            title: x.filename,
+            description: x.description,
+            url: x.url.substring(2),
+            date: new Date(x.date)
+          }
+        })
+      }));
+  }
+}
+
+module.exports = OsmosisScraper;
