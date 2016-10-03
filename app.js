@@ -4,10 +4,9 @@ const FeedGenerator = require('./feedGenerator');
 
 const app = express();
 
-
-app.get('/jojo', function(req, res){
+app.get('/jojo-diamond-unbreakable', function(req, res){
   res.set('Content-Type', 'text/xml');
-  new JojoFeed('horriblesubs jojo 720p crusaders')
+  new JojoFeed('horriblesubs jojo 720p diamond is unbreakable')
     .scrape(x =>
       res.send(new FeedGenerator().generateXML(x))
     );
