@@ -27,9 +27,11 @@ class OsmosisScraper {
           return {
             title: x.filename,
             description: x.description,
-            url: x.url.substring(2),
+            url: 'http://' + x.url.substring(2),
             date: new Date(x.date)
           }
+        }).filter((e, i, array) => {
+          return i + 1 < array.length && array[i].title != array[i + 1].title;
         })
       }));
   }
