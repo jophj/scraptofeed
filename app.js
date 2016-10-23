@@ -1,5 +1,5 @@
 const express = require('express');
-const JojoFeed = require('./osmosisScraper');
+const OsmosisScraper = require('./osmosisScraper');
 const FeedGenerator = require('./feedGenerator');
 
 const app = express();
@@ -11,7 +11,16 @@ app.use(function (req, res, next) {
 
 app.get('/jojo-diamond-unbreakable', function(req, res){
   res.set('Content-Type', 'text/xml');
-  new JojoFeed('horriblesubs jojo 720p diamond is unbreakable')
+  new OsmosisScraper('horriblesubs jojo 720p diamond is unbreakable')
+    .scrape(x => {
+      res.send(new FeedGenerator().generateXML(x))
+    }
+    );
+});
+
+app.get('/dragon-ball-super', function(req, res){
+  res.set('Content-Type', 'text/xml');
+  new OsmosisScraper('horriblesubs jojo 720p diamond is unbreakable')
     .scrape(x => {
       res.send(new FeedGenerator().generateXML(x))
     }
