@@ -20,7 +20,7 @@ app.get('/jojo-diamond-unbreakable', function(req, res){
 
 app.get('/dragon-ball-super', function(req, res){
   res.set('Content-Type', 'text/xml');
-  new OsmosisScraper('horriblesubs jojo 720p diamond is unbreakable')
+  new OsmosisScraper('dragon ball super 720p kamifs 10bit')
     .scrape(x => {
       res.send(new FeedGenerator().generateXML(x))
     }

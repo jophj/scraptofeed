@@ -14,16 +14,19 @@ class OsmosisScraper {
       .follow('@href')
       .find('.viewdownloadbutton > a')
       .set('url', '@href')
-      .find('td.vtop')
+      .find('table.viewtable tr:nth-child(2) td.vtop')
       .set('date', 'text()')
       .find("td.viewtorrentname")
       .set("filename", "text()")
       .data(function(data) {
         that.data.push(data);
-      }).done(() => callback({
+      })
+      .error(console.log)
+      .done(() => callback({
         title: that.searchString,
         description: that.searchString,
         items: that.data.map(x => {
+          console.log(x.date, new Date(x.date));
           return {
             title: x.filename,
             description: x.description,
