@@ -1,6 +1,6 @@
 const osmosis = require('osmosis');
 
-class OsmosisScraper {
+class NyaaScraper {
   constructor(searchString){
     this.data = []
     this.searchString = searchString;
@@ -26,7 +26,6 @@ class OsmosisScraper {
         title: that.searchString,
         description: that.searchString,
         items: that.data.map(x => {
-          console.log(x.date, new Date(x.date));
           return {
             title: x.filename,
             description: x.description,
@@ -40,4 +39,4 @@ class OsmosisScraper {
   }
 }
 
-module.exports = OsmosisScraper;
+module.exports = NyaaScraper;
