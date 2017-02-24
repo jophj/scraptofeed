@@ -22,8 +22,6 @@ class EztvScraper {
       .data(function(data) {
         that.data.push(data);
       })
-      .log(console.log)
-      .debug(console.log)
       .error(console.log)
       .done(() => callback({
         title: that.data[0].showName,
