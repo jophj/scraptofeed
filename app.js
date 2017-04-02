@@ -26,6 +26,22 @@ app.get('/dragon-ball-super', function(req, res){
     });
 });
 
+app.get('/nyaa/:animeName', function(req, res) {
+  res.set('Content-Type', 'text/xml');
+  let animeName = req.params.animeName;
+  
+  console.log(animeName);
+  if(!animeName){
+    res.sendStatus(400);
+    return;
+  }
+
+  new NyaaScraper(animeName)
+    .scrape(x => {
+      res.send(new FeedGenerator().generateXML(x))
+    });
+});
+
 app.get('/the-walking-dead', function(req, res){
   res.set('Content-Type', 'text/xml');
   new EztvScraper(428)
